@@ -10,6 +10,7 @@ import com.sys1yagi.mastodon4j.extension.fromJson
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import java.io.IOException
+import java.net.URLEncoder
 
 /**
  * see more https://github.com/tootsuite/documentation/blob/master/Using-the-API/API.md#apps
@@ -98,8 +99,8 @@ class Apps(private val client: MastodonClient) {
                 "client_id=$clientId",
                 "client_secret=$clientSecret",
                 "scope=$scope",
-                "username=$userName",
-                "password=$password",
+                "username=" + URLEncoder.encode(userName, "UTF-8"),
+                "password=" + URLEncoder.encode(password, "UTF-8"),
                 "grant_type=password"
         ).joinToString(separator = "&")
         return MastodonRequest(
